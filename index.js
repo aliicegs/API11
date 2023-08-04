@@ -16,7 +16,6 @@ app.listen(port, () => {
 import dotenv from "dotenv";
 
 dotenv.config();
-
 import { selectUsuarios } from "./bd.js";
 
 app.get("/usuarios", async (req, res) => {
