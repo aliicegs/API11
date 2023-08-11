@@ -16,7 +16,20 @@ app.listen(port, () => {
 import dotenv from "dotenv";
 
 dotenv.config();
-import { selectUsuarios, selectUsuario } from "./bd.js";
+import { selectUsuarios, selectUsuario, insertUsuario } from "./bd.js";
+
+app.use(express.json());
+
+app.post("/usuario", async (req, res) => {
+  console.log("Rota POST /usuario solicitada");
+  try {
+    await insertUsuario(req.body);
+    res.status(201).json({ message: "Usuário inserido com sucesso!" });
+  } catch (error) {
+    res.status(error.status || 500).json({ message: error.message || "Erro!" });
+  }
+});
+
 
 app.get("/usuarios", async (req, res) => {
   console.log("Rota GET/usuarios solicitada");
