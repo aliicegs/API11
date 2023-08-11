@@ -14,7 +14,7 @@ async function selectUsuarios() {
   return res.rows;
 }
 
-export { selectUsuarios, selectUsuario, insertUsuario };
+export { selectUsuarios, selectUsuario, insertUsuario, deleteUsuario };
 
 async function selectUsuario(id) {
   const client = await connect();
@@ -31,3 +31,8 @@ async function insertUsuario(data) {
   await client.query(query, usuario);
 }
 
+async function deleteUsuario(id) {
+  const client = await connect();
+  const query = "DELETE FROM usuario WHERE id = $1";
+  await client.query(query, [id]);
+}
