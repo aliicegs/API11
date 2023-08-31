@@ -3,19 +3,18 @@ import { Router } from "express";
 import { selectUsuarios, selectUsuario, insertUsuario, deleteUsuario, updateUsuario }from "../db/index.js";
 
 const router = Router();
-    
-router.get("/usuarios", async (req, res) => {
-    console.log("Rota GET/usuarios solicitada");
+router.get("/usuario", async (req, res) => {
+    console.log("Rota GET /usuario solicitada");
     try {
-        const usuarios = await selectUsuarios();
-        res.json(usuarios);
+      const usuarios = await selectUsuarios();
+      res.json(usuarios);
     } catch (error) {
-        res.status(error.status || 500).json({ message: error.message || "Erro!" });
+      res.status(error.status || 500).json({ message: error.message || "Erro!" });
     }
-});
+  });
     
 router.get("/usuario/:id", async (req, res) => {
-    console.log("Rota GET /usuario solicitada");
+    console.log(`Rota GET /usuario/ ${req.params.id} solicitada`);
     try {
         const usuario = await selectUsuario(req.params.id);
         if (usuario.length > 0) res.json(usuario);
