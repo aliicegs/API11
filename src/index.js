@@ -13,8 +13,9 @@ app.use(express.json());
 
 app.get("/", (req, res) => {        
   res.json({
-    message: "API para CRUD usuario: https://github.com/aliicegs/API11",
+    nome: "Alice Gonçalves Silva",     
   });
+  console.log("Rota / solicitada");
 });
 
 app.listen(port, () => {            
