@@ -25,3 +25,5 @@ app.listen(port, () => {
 import roteadorLogin from "./routes/login.js";
 
 app.use(roteadorLogin);
+
+app.use(express.urlencoded({ extended: true }));
