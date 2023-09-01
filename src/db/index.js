@@ -14,7 +14,7 @@ async function selectUsuarios() {
   return res.rows;
 }
 
-export { selectUsuarios, selectUsuario, insertUsuario, deleteUsuario, updateUsuario };
+export { selectUsuarios, selectUsuario, insertUsuario, deleteUsuario, updateUsuario,  autenticarUsuario };
 
 async function selectUsuario(id) {
   const client = await connect();
@@ -43,4 +43,12 @@ async function updateUsuario(data) {
     "UPDATE usuario SET nome = $1, email = $2, senha = $3 WHERE id = $4";
   const usuario = [data.nome, data.email, data.senha, data.id];
   await client.query(query, usuario);
+}
+
+async function autenticarUsuario(email, senha) {
+  const client = await connect();
+  const query = "SELECT * FROM usuario WHERE email = $1 AND senha = $2";
+  const usuario = [email, senha];
+  const res = await client.query(query, usuario);
+  return res.rows[0];
 }
